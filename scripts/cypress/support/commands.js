@@ -42,6 +42,9 @@ Cypress.Commands.add('setup', ({ dbType }) => {
     }
     cy.restoreLocalStorage().then(() => {
       console.log('setup done', localStorage.getItem('nocodb-gui-v2'))
+
+      Cypress.LocalStorage.clear = () => {};
+      
       let project;
 
       if(dbType === "postgres") {
@@ -88,7 +91,10 @@ Cypress.Commands.add('getSettled', (selector, opts = {}) => {
   };
 
   // wrap, so we can chain cypress commands off the result
-  return cy.wrap(null).then(() => {
+  return cy
+    .wrap(null)
+    .log(`getSettled:${selector}`)
+    .then(() => {
       return new Cypress.Promise((resolve) => {
           return isAttached(resolve, 0);
       }).then((el) => {
