@@ -5,7 +5,6 @@ import {
   CellValueInj,
   ColumnInj,
   RowInj,
-  computed,
   isBt,
   isCount,
   isFormula,
@@ -18,13 +17,6 @@ import {
 } from '#imports'
 import type { Row } from '~/lib'
 import { NavigateDir } from '~/lib'
-import HasMany from '~/components/virtual-cell/HasMany.vue'
-import ManyToMany from '~/components/virtual-cell/ManyToMany.vue'
-import BelongsTo from '~/components/virtual-cell/BelongsTo.vue'
-import Lookup from '~/components/virtual-cell/Lookup.vue'
-import Rollup from '~/components/virtual-cell/Rollup.vue'
-import Formula from '~/components/virtual-cell/Formula.vue'
-import Count from '~/components/virtual-cell/Count.vue'
 
 const props = defineProps<{
   column: ColumnType
@@ -43,18 +35,6 @@ provide(ColumnInj, column)
 provide(ActiveCellInj, active)
 provide(RowInj, row)
 provide(CellValueInj, toRef(props, 'modelValue'))
-
-const virtualCell = computed(() => {
-  if (!column.value) return null
-
-  if (isHm(column.value)) return HasMany
-  if (isMm(column.value)) return ManyToMany
-  if (isBt(column.value)) return BelongsTo
-  if (isLookup(column.value)) return Lookup
-  if (isRollup(column.value)) return Rollup
-  if (isFormula(column.value)) return Formula
-  if (isCount(column.value)) return Count
-})
 </script>
 
 <template>
@@ -63,6 +43,12 @@ const virtualCell = computed(() => {
     @keydown.stop.enter.exact="emit('navigate', NavigateDir.NEXT)"
     @keydown.stop.shift.enter.exact="emit('navigate', NavigateDir.PREV)"
   >
-    <component :is="virtualCell" />
+    <LazyVirtualCellHasMany v-if="isHm(column)" />
+    <LazyVirtualCellManyToMany v-else-if="isMm(column)" />
+    <LazyVirtualCellBelongsTo v-else-if="isBt(column)" />
+    <LazyVirtualCellRollup v-else-if="isRollup(column)" />
+    <LazyVirtualCellFormula v-else-if="isFormula(column)" />
+    <LazyVirtualCellCount v-else-if="isCount(column)" />
+    <LazyVirtualCellLookup v-else-if="isLookup(column)" />
   </div>
 </template>
