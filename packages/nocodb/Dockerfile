@@ -41,7 +41,7 @@ RUN npm ci --production --quiet \
 ##########
 # Runner
 ##########
-FROM alpine:3.12
+FROM alpine:3.15
 WORKDIR /usr/src/app
 
 ENV NC_DOCKER 0.6
