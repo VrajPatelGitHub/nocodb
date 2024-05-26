@@ -66,7 +66,7 @@
     "download-git-repo": "^3.0.2",
     "express": "^4.17.3",
     "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
+    "glob": "^9.0.0",
     "inquirer": "^7.3.3",
     "jsonfile": "^6.0.1",
     "knex": "^2.4.0",
