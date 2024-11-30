@@ -57,7 +57,7 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.7.8",
     "boxen": "^4.2.0",
     "chalk-pipe": "^4.0.0",
     "cli-table3": "0.6.1",
@@ -72,7 +72,7 @@
     "knex": "^2.4.0",
     "linux-os-info": "^2.0.0",
     "mkdirp": "^1.0.4",
-    "mssql": "^6.2.1",
+    "mssql": "^8.0.0",
     "mysql": "^2.18.1",
     "open": "^7.1.0",
     "ora": "^4.0.5",
