@@ -78,7 +78,7 @@
     "ora": "^4.0.5",
     "os-locale": "^5.0.0",
     "pg": "^8.3.2",
-    "sha.js": "^2.4.11",
+    "sha.js": "^2.4.12",
     "shelljs": "^0.8.4",
     "tcp-port-used": "^1.0.1",
     "unique-names-generator": "^4.5.0",
